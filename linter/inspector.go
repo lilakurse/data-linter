@@ -2,19 +2,22 @@ package linter
 
 const Step = 50
 
-func Inspect(iterator Iterator) error {
+// TODO: check logic
+func Inspect(iterator Iterator) ([]*Problem, error) {
 
 	docsChecked := 0
+	problemsToCommit := []*Problem{}
 
 	for docsChecked <= iterator.Count() {
-		for _, element := range iterator.Next(Step) {
-			err := element.Check()
+		for _, document := range iterator.Next(Step) {
+			docProblems, err := document.Check()
 			if err != nil {
-				return err
+				return nil, err
 			}
+			problemsToCommit = append(problemsToCommit, docProblems)
 		}
 		docsChecked += Step
 	}
 
-	return nil
+	return problemsToCommit, nil
 }
