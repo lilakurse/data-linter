@@ -1,2 +1,2 @@
 # data-linter
-Service for lint your data and save lint report
+Service for linting your data and generating lint reports
