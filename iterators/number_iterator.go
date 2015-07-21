@@ -9,21 +9,22 @@ import (
 
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
 // Each Number is a Checker, i.e., it has the Check() method implemented.
-func Generator() int {
-	// TODO: implement the Iterator interface
-	rand.Seed(time.Now().UnixNano())
-	g := rand.Int()
-	fmt.Print(g) // TODO: eliminate from the final version
-	return g
-}
-
 type Number int
+type Generator struct {
+	Name  *linter.Report
+	Count *linter.Count
+	Next  *linter.Checker
+}
 
 func (Number) Check() ([]*linter.Problem, error) {
 	// TODO
 }
 
-func Next(Step int) []linter.Checker {
+func (g *Generator) Name() string {
+	return fmt.Sprintf("This is a test random number generator")
+}
+
+func (g *Generator) Next(Step int) []linter.Checker {
 	checkers := []linter.Checker{}
 	for i := 0; i < Step; i++ {
 		rand.Seed(time.Now().UnixNano())
