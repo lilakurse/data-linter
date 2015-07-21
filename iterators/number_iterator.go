@@ -22,3 +22,15 @@ type Number int
 func (Number) Check() ([]*linter.Problem, error) {
 	// TODO
 }
+
+func Next(Step int) []linter.Checker {
+	checkers := []linter.Checker{}
+	for i := 0; i < Step; i++ {
+		rand.Seed(time.Now().UnixNano())
+		k := rand.Int()
+		checker := Number(k)
+		checkers = append(checkers, checker)
+	}
+	return checkers
+	// TODO: add some checking against Count
+}
