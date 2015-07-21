@@ -2,8 +2,8 @@ package linter
 
 import "time"
 
-//Report specifies a list of validation errors
-//and time details of modifying the report
+// The Report struct contains a list of problems (i.e., various validation errors)
+// and time details of modifications made to the report.
 type Report struct {
 	Name       string
 	Created    *time.Time
@@ -14,7 +14,7 @@ type Report struct {
 	Statistics Count
 }
 
-// Count specifies a number of reviewed(examined) document
+// The auxiliary Count struct contains numeric information on inspected documents.
 type Count struct {
 	Total     int64
 	Inspected int64
@@ -22,34 +22,36 @@ type Count struct {
 	Invalid   int64
 }
 
-//Problem specifies details of error
-//where original is a string representation of the original file
-//that contains problem(s)
+// The Problem struct refers to a particular file that contains problem(s).
+// Original is the string representation of that file.
 type Problem struct {
 	Id       string
 	Original string
 	Details  []*ProblemDetails
 }
 
-//ProblemDetails specifies information about validation errors
-//where id is identifier of the problem's location in the original file
+// The auxiliary ProblemDetails struct contains information about specific validation error.
+// Id identifies the problem's location in the original file.
 type ProblemDetails struct {
 	Id          string
 	Fragment    string
 	Description string
 }
 
+// TODO: document
 type Reporter struct {
 	ReportReader
 	ReportWriter
 }
 
+// TODO: document
 type ReportWriter interface {
 	Start(*Report) error
 	Finish(*Report) error
 	Commit(*Report, []*Problem) error
 }
 
+// TODO: document
 type ReportReader interface {
 	// TODO: complete
 	Count()

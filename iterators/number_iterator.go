@@ -1,19 +1,24 @@
 package iterators
 
 import (
+	"fmt"
+	"github.com/GabbyyLS/data-linter/linter"
 	"math/rand"
 	"time"
-	"fmt"
 )
 
-//Seed. This method initializes the random source.
-//When we use a seed based on the current time,
-//each program execution will start with a different random sequence.
-
+// This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
+// Each Number is a Checker, i.e., it has the Check() method implemented.
 func Generator() int {
+	// TODO: implement the Iterator interface
 	rand.Seed(time.Now().UnixNano())
-	g :=rand.Int()
-	fmt.Print(g)
+	g := rand.Int()
+	fmt.Print(g) // TODO: eliminate from the final version
 	return g
 }
 
+type Number int
+
+func (Number) Check() ([]*linter.Problem, error) {
+	// TODO
+}
