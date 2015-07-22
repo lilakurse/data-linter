@@ -16,24 +16,22 @@ type Generator struct {
 }
 
 func (Number) Check() ([]*linter.Problem, error) {
-	problem :=[]linter.Problem{}
-	for _,value:=range checkers{
-		if value/2 !=0 {
-			return append(problem, "not even"), error
-		}
+	problems := []*linter.Problem{}
+	value := Number()
+	if value/2 != 0 {
+		problem := "not even"
+		problems = append(problems, problem)
+		return problems, error
 	}
-	return nil,nil
+	return value,nil
 }
 
 func (g *Generator) Name() string {
-	testGenerator := Generator{Name:"Test generator", Count:1000}
-	//return "This is a test random number generator"
-	return testGenerator.Name
+	return g.Name
 }
 
-func (g *Generator) Count() int64{
-	testGenerator := Generator{Name:"Test generator", Count:1000}
-	return testGenerator.Count
+func (g *Generator) Count() int64 {
+	return g.Count
 }
 
 func (g *Generator) Next(Step int) []linter.Checker {
@@ -45,8 +43,8 @@ func (g *Generator) Next(Step int) []linter.Checker {
 		checkers = append(checkers, checker)
 
 	}
-//	if Step>Count()
-//		return nil
+	//	if Step>Count()
+	//		return nil
 	return checkers
 	// TODO: add some checking against Count
 }

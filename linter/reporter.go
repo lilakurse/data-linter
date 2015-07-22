@@ -38,7 +38,7 @@ type ProblemDetails struct {
 	Description string
 }
 
-// TODO: document
+// The Reporter struct contains information about read and write operations on reporter.
 type Reporter struct {
 	ReportReader
 	ReportWriter
