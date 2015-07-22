@@ -1,7 +1,7 @@
 package linter
 
 import (
-		"time"
+	"time"
 )
 
 // The Report struct contains a list of problems (i.e., various validation errors)
@@ -56,6 +56,8 @@ type ReportWriter interface {
 // TODO: document
 type ReportReader interface {
 	// TODO: complete
-	Count()
-	Find()
+	Find_All() []*Report           // Find_All reports.
+	Find_One(Name string) []Report // Find only one report by his name. // TODO: []*Report?
+	Count() int64                  // Total count of scaned doc.
+	Logger() string                // Report time information.
 }

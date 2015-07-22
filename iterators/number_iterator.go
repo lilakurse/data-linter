@@ -5,7 +5,6 @@ import (
 	"github.com/GabbyyLS/data-linter/linter"
 	"gopkg.in/mgo.v2/bson"
 	"math/rand"
-	"src-tms.als.local/go/marketplace/Godeps/_workspace/src/gopkg.in/mgo.v2/bson"
 	"strconv"
 	"time"
 )
@@ -54,7 +53,6 @@ func (g *Generator) Next(Step int) []linter.Checker {
 		k := rand.Int()
 		checker := Number(k)
 		checkers = append(checkers, checker)
-
 	}
 	//	if Step>Count()
 	//		return nil
