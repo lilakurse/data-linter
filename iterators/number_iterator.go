@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+	"src-tms.als.local/go/marketplace/Godeps/_workspace/src/gopkg.in/mgo.v2/bson"
 )
 
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
@@ -21,11 +22,17 @@ func (n Number) Check() ([]*linter.Problem, error) {
 	err := nil
 
 	problems := []*linter.Problem{}
+	details:= []*linter.ProblemDetails
 	if Number/2 != 0 {
 		problem := new(linter.Problem)
-		problem.Id = bson.NewObjectId()
-		problem.Original = strconv.Itoa(Number()) // not sure about it
-		problem.Details = "not even"
+		detail:=new(linter.ProblemDetails)
+		problem.Id =  bson.NewObjectId().Hex()
+		detail.Id ="1"
+		problem.Original = strconv.Itoa(Number())
+		detail.Fragment= strconv.Itoa(Number())
+		detail.Description="not even"
+		details :=append(details,detail)
+		problem.Details = details
 		problems = append(problems, problem)
 		return problems, nil
 	}
