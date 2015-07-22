@@ -13,6 +13,7 @@ import (
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
 // Each Number is a Checker, i.e., it has the Check() method implemented.
 type Number int
+
 type Generator struct {
 	Name  string
 	Count int64
