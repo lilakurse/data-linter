@@ -3,7 +3,9 @@ package iterators
 import (
 	//"fmt"
 	"github.com/GabbyyLS/data-linter/linter"
+	"gopkg.in/mgo.v2/bson"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -15,15 +17,19 @@ type Generator struct {
 	Count int64
 }
 
-func (Number) Check() ([]*linter.Problem, error) {
+func (n Number) Check() ([]*linter.Problem, error) {
+	err := nil
+
 	problems := []*linter.Problem{}
-	value := Number()
-	if value/2 != 0 {
-		problem := "not even"
+	if Number/2 != 0 {
+		problem := new(linter.Problem)
+		problem.Id = bson.NewObjectId()
+		problem.Original = strconv.Itoa(Number()) // not sure about it
+		problem.Details = "not even"
 		problems = append(problems, problem)
-		return problems, error
+		return problems, nil
 	}
-	return value,nil
+	return nil, err
 }
 
 func (g *Generator) Name() string {

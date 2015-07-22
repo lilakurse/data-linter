@@ -1,6 +1,9 @@
 package linter
 
-import "time"
+import (
+	"gopkg.in/mgo.v2/bson"
+	"time"
+)
 
 // The Report struct contains a list of problems (i.e., various validation errors)
 // and time details of modifications made to the report.
@@ -25,7 +28,7 @@ type Count struct {
 // The Problem struct refers to a particular file that contains problem(s).
 // Original is the string representation of that file.
 type Problem struct {
-	Id       string
+	Id       bson.ObjectId
 	Original string
 	Details  []*ProblemDetails
 }
