@@ -5,9 +5,9 @@ import (
 	"github.com/GabbyyLS/data-linter/linter"
 	"gopkg.in/mgo.v2/bson"
 	"math/rand"
+	"src-tms.als.local/go/marketplace/Godeps/_workspace/src/gopkg.in/mgo.v2/bson"
 	"strconv"
 	"time"
-	"src-tms.als.local/go/marketplace/Godeps/_workspace/src/gopkg.in/mgo.v2/bson"
 )
 
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
@@ -20,18 +20,17 @@ type Generator struct {
 
 func (n Number) Check() ([]*linter.Problem, error) {
 	err := nil
-
 	problems := []*linter.Problem{}
-	details:= []*linter.ProblemDetails
+	details := []*linter.ProblemDetails{}
 	if Number/2 != 0 {
 		problem := new(linter.Problem)
-		detail:=new(linter.ProblemDetails)
-		problem.Id =  bson.NewObjectId().Hex()
-		detail.Id ="1"
+		detail := new(linter.ProblemDetails)
+		problem.Id = bson.NewObjectId().Hex()
+		detail.Id = "1"
 		problem.Original = strconv.Itoa(Number())
-		detail.Fragment= strconv.Itoa(Number())
-		detail.Description="not even"
-		details :=append(details,detail)
+		detail.Fragment = strconv.Itoa(Number())
+		detail.Description = "not even"
+		details := append(details, detail)
 		problem.Details = details
 		problems = append(problems, problem)
 		return problems, nil
