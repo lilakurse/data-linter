@@ -48,7 +48,7 @@ type Reporter struct {
 
 // TODO: document
 type ReportWriter interface {
-	Start(*Report) error
+	Start() (*Report, error) // TODO: think about this signature ( was: Start(*Report) error )
 	Finish(*Report) error
 	Commit(*Report, []*Problem) error
 }
@@ -56,8 +56,10 @@ type ReportWriter interface {
 // TODO: document
 type ReportReader interface {
 	// TODO: complete
-	Find_All() []*Report           // Find_All reports.
-	Find_One(Name string) []Report // Find only one report by his name. // TODO: []*Report?
-	Count() int64                  // Total count of scaned doc.
-	Logger() string                // Report time information.
+	GetAllReports() []Report            // Get all reports that presently exist.
+	GetReportByName(Name string) Report // Find a report by its name.
+	TotalReportsCount() int64           // Total amount of scanned docs.
+	Logger() string                     // Report time information.
+	// TODO: how about searching by creation/update/commit dates?
+	// TODO: how about getting a particular report's statistics?
 }
