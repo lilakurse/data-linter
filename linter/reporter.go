@@ -56,10 +56,9 @@ type ReportWriter interface {
 // TODO: document
 type ReportReader interface {
 	// TODO: complete
-	GetAllReports() []Report            // Get all reports that presently exist.
-	GetReportByName(Name string) Report // Find a report by its name.
-	TotalReportsCount() int64           // Total amount of scanned docs.
-	Logger() string                     // Report time information.
+	GetAllReports() []Report           // Get all reports that presently exist.
+	GetReport(time *time.Time) Report  // Find a report by its creation/update/commit dates.
+	TotalReportsCount(r *Report) int64 // Total amount of scanned docs.
 	// TODO: how about searching by creation/update/commit dates?
 	// TODO: how about getting a particular report's statistics?
 }
