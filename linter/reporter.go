@@ -55,12 +55,17 @@ type ReportWriter interface {
 
 // TODO: document
 type ReportReader interface {
-	GetAllReports() []Report           // Get all reports that presently exist.
-	GetReport(time *time.Time) *Report // Find a report by its creation/update/commit date. // TODO: GetReportByName() + 3 other date-related methods
-	TotalReportsCount() ReportsCount   // Statistics on reports (how many failed, how many were successfull etc.).
+	GetAllReports() []Report                         // Get all reports that presently exist.
+	GetReportByName(Name string) *Report             // Find a report by its name. // TODO: GetReportByName() + 3 other date-related methods
+	GetReportByCreationTime(time *time.Time) *Report // Find a report by its creation date.
+	GetReportByUpdateTime(time *time.Time) *Report   // Find a report by its update date.
+	GetReportByCommitTime(time *time.Time) *Report   // Find a report by its commit date.
+	TotalReportsCount() *ReportsCount                // Statistics on reports (how many failed, how many were successfull etc.).
 }
 
 // TODO: document
 type ReportsCount struct {
 	// TODO: implement
+	failed      int64
+	successfull int64
 }
