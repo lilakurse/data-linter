@@ -11,7 +11,7 @@ type Report struct {
 	Created    *time.Time
 	Updated    *time.Time
 	Finished   *time.Time
-	Error      string // TODO: do we need this one?
+	Error      string
 	Problems   []*Problem
 	Statistics Count
 }
