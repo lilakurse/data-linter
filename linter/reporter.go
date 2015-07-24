@@ -48,16 +48,24 @@ type Reporter struct {
 
 // TODO: document
 type ReportWriter interface {
-	Start(*Report) error
+	Start() (*Report, error)
 	Finish(*Report) error
 	Commit(*Report, []*Problem) error
 }
 
 // TODO: document
 type ReportReader interface {
-	// TODO: complete
-	Find_All() []*Report           // Find_All reports.
-	Find_One(Name string) []Report // Find only one report by his name. // TODO: []*Report?
-	Count() int64                  // Total count of scaned doc.
-	Logger() string                // Report time information.
+	GetAllReports() []*Report                        // Get all reports that presently exist.
+	GetReportByName(Name string) *Report             // Find a report by its name. //
+	GetReportByCreationTime(time *time.Time) *Report // Find a report by its creation date.
+	GetReportByUpdateTime(time *time.Time) *Report   // Find a report by its update date.
+	GetReportByCommitTime(time *time.Time) *Report   // Find a report by its commit date.
+	TotalReportsCount() *ReportsCount                // Statistics on reports (how many failed, how many were successfull etc.).
+}
+
+// TODO: document
+type ReportsCount struct {
+	Total       int64
+	Failed      int64
+	Successfull int64
 }
