@@ -47,6 +47,8 @@ type Reporter struct {
 }
 
 // TODO: document
+// The interface ReportWriter contains three methods that creates a report,
+// filling it with inspected problems and closes it.
 type ReportWriter interface {
 	Start() (*Report, error)
 	Finish(*Report) error
@@ -54,6 +56,8 @@ type ReportWriter interface {
 }
 
 // TODO: document
+// The interface ReportReader contains methods that shows all created reports and there total count
+// and provides a search on different fields.
 type ReportReader interface {
 	GetAllReports() []*Report                        // Get all reports that presently exist.
 	GetReportByName(Name string) *Report             // Find a report by its name. //
@@ -64,6 +68,7 @@ type ReportReader interface {
 }
 
 // TODO: document
+// The ReportCount struct contains statistics about total number of reports.
 type ReportsCount struct {
 	Total       int64
 	Failed      int64

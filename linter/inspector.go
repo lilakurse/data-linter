@@ -3,6 +3,7 @@ package linter
 const Step = 50
 
 // TODO: document (step 3) and check logic (step 4)
+// The Inspect function collects  problems in iterator for report.
 func Inspect(iterator Iterator) ([]*Problem, error) {
 
 	docsChecked := 0
