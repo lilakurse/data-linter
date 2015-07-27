@@ -1,9 +1,8 @@
 package linter
 
-// TODO: document
-// The Iterator interface provides access to collections.
+// The Iterator contains documents and provides them in fixed-sized batches.
 type Iterator interface {
-	Name() string // TODO: do we need this one?
+	Name() string
 	Count() int64
-	Next(Step int) []Checker // TODO: []*Checker?
+	Next(Step int) []*Checker
 }
