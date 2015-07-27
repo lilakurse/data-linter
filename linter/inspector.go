@@ -11,7 +11,7 @@ func Inspect(iterator Iterator) ([]*Problem, error) {
 
 	for docsChecked <= iterator.Count() {
 		for _, document := range iterator.Next(Step) {
-			docProblems, err := document.Check()
+			docProblems, err := document.Check() // TODO: fix this
 			if err != nil {
 				return nil, err
 			}
