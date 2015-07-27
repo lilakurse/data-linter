@@ -54,8 +54,5 @@ func (g *Generator) Next(Step int) []linter.Checker {
 		checker := Number(k)
 		checkers = append(checkers, checker)
 	}
-	//	if Step>Count()
-	//		return nil
 	return checkers
-	// TODO: add some checking against Count
 }

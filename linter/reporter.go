@@ -4,19 +4,19 @@ import (
 	"time"
 )
 
-// The Report struct contains a list of problems (i.e., various validation errors)
+// Report contains a list of problems (i.e., various validation errors)
 // and time details of modifications made to the report.
 type Report struct {
 	Name       string
 	Created    *time.Time
 	Updated    *time.Time
 	Finished   *time.Time
-	Error      string // TODO: do we need this one?
+	Error      string
 	Problems   []*Problem
 	Statistics Count
 }
 
-// The auxiliary Count struct contains numeric information on inspected documents.
+// Count contains numeric information on inspected documents.
 type Count struct {
 	Total     int64
 	Inspected int64
@@ -24,7 +24,7 @@ type Count struct {
 	Invalid   int64
 }
 
-// The Problem struct refers to a particular file that contains problem(s).
+// Problem refers to a particular file that contains problem(s).
 // Original is the string representation of that file.
 type Problem struct {
 	Id       string
@@ -32,7 +32,7 @@ type Problem struct {
 	Details  []*ProblemDetails
 }
 
-// The auxiliary ProblemDetails struct contains information about specific validation error.
+// ProblemDetails contains information about a specific validation error.
 // Id identifies the problem's location in the original file.
 type ProblemDetails struct {
 	Id          string
@@ -40,32 +40,32 @@ type ProblemDetails struct {
 	Description string
 }
 
-// The Reporter struct contains information about read and write operations on reporter.
+// Reporter embeds read and write functionality for reports.
 type Reporter struct {
 	ReportReader
 	ReportWriter
 }
 
-// TODO: document
+// ReportWriter instantiates a report, fills it with problems, and closes it.
 type ReportWriter interface {
 	Start() (*Report, error)
 	Finish(*Report) error
 	Commit(*Report, []*Problem) error
 }
 
-// TODO: document
+// ReportReader provides functionality for accessing various report-related information.
 type ReportReader interface {
-	GetAllReports() []*Report                        // Get all reports that presently exist.
-	GetReportByName(Name string) *Report             // Find a report by its name. //
-	GetReportByCreationTime(time *time.Time) *Report // Find a report by its creation date.
-	GetReportByUpdateTime(time *time.Time) *Report   // Find a report by its update date.
-	GetReportByCommitTime(time *time.Time) *Report   // Find a report by its commit date.
-	TotalReportsCount() *ReportsCount                // Statistics on reports (how many failed, how many were successfull etc.).
+	GetAllReports() []*Report
+	GetReportByName(Name string) *Report
+	GetReportByCreationTime(time *time.Time) *Report
+	GetReportByUpdateTime(time *time.Time) *Report
+	GetReportByCommitTime(time *time.Time) *Report
+	TotalReportsCount() *ReportsCount
 }
 
-// TODO: document
+// ReportCount contains statistics on reports.
 type ReportsCount struct {
-	Total       int64
-	Failed      int64
-	Successfull int64
+	Total      int64
+	Failed     int64
+	Successful int64
 }
