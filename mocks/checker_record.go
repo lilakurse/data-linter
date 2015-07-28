@@ -9,8 +9,8 @@ func NewMockChecker() *Checker {
 	mockObj := new(Checker)
 
 	// Tests for Checker().
-	mockObj.On("Check", mock.ValidDoc).Return(nil)
-	mockObj.On("Check", mock.InvalidDoc).Return(errors.New("invalid document"))
+	mockObj.On("Check", mock.ValidDoc).Return("valid",nil)
+	mockObj.On("Check", mock.InvalidDoc).Return(nil,errors.New("invalid document"))
 
 	return mockObj
 }
