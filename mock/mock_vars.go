@@ -1,5 +1,7 @@
 package mock
 
+import "github.com/GabbyyLS/data-linter/linter"
+
 type Document struct {
 	Name string
 }
@@ -7,4 +9,7 @@ type Document struct {
 var (
 	InvalidDoc = &Document{Name: "This is an invalid document"}
 	ValidDoc   = &Document{Name: "This is an valid document"}
+	BadDoc     = &Document{Name: "666"}
+	Problem    = []*linter.Problem{Original:InvalidDoc.Name} //есть одно поле
+
 )
