@@ -1,7 +1,9 @@
 package mocks
 
-import "github.com/GabbyyLS/data-linter/linter"
-import "github.com/stretchr/testify/mock"
+import (
+	"github.com/GabbyyLS/data-linter/linter"
+	"github.com/stretchr/testify/mock"
+)
 
 type ReportWriter struct {
 	mock.Mock
