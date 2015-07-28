@@ -5,6 +5,6 @@ type Document struct {
 }
 
 var (
-	invalidDoc = &Document{Name: "This is an invalid document"}
-	validDoc   = &Document{Name: "This is an valid document"}
+	InvalidDoc = &Document{Name: "This is an invalid document"}
+	ValidDoc   = &Document{Name: "This is an valid document"}
 )
