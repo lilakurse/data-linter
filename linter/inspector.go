@@ -8,14 +8,14 @@ func Inspect(iterator Iterator) ([]*Problem, error) {
 	problemsToCommit := []*Problem{}
 	for docsChecked <= iterator.Count() {
 		for _, document := range iterator.Next(Step) {
-			docProblems, err := document.(Checker).Check()
+			docToCheck := *document
+			docProblems, err := docToCheck.Check()
 			if err != nil {
 				return nil, err
 			}
-			problemsToCommit = append(problemsToCommit, docProblems)
+			problemsToCommit = append(problemsToCommit, docProblems...)
 		}
 		docsChecked += Step
 	}
-
 	return problemsToCommit, nil
 }
