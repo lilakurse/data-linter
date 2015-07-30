@@ -2,23 +2,21 @@ package mocks
 
 import (
 	"errors"
-	"github.com/GabbyyLS/data-linter/linter"
 )
 
-func NewValidDoc() *Checker {
+func NewMockValidDoc() *Checker {
 	mockObj := new(Checker)
-	mockObj.On("Check").Return([]*linter.Problem{}, nil)
+	mockObj.On("Check").Return(mock.EmptyProblemList, nil)
 	return mockObj
 }
 
-// TODO: implement InvalidDoc as a MockChecker
-func NewInvalidDoc() *Checker {
+func NewMockInvalidDoc() *Checker {
 	mockObj := new(Checker)
-	mockObj.On("Check").Return(mock.Problem, nil)
-	return  mockObj
+	mockObj.On("Check").Return(mock.Problems, nil)
+	return mockObj
 }
 
-func NewBadDoc() *Checker {
+func NewMockBadDoc() *Checker {
 	mockObj := new(Checker)
 	mockObj.On("Check").Return(nil, errors.New("Error: bad document"))
 	return mockObj
