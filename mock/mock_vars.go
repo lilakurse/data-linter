@@ -8,7 +8,7 @@ type Document struct {
 
 var (
 	InvalidDoc = &Document{Name: "This is an invalid document"}
-	ValidDoc   = &Document{Name: "This is an valid document"}
+	ValidDoc   = &Document{Name: "This is a valid document"}
 	BadDoc     = &Document{Name: "666"}
 	Problem    = linter.Problem{Original: InvalidDoc.Name}
 

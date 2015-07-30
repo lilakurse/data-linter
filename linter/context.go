@@ -8,14 +8,16 @@ import (
 type Context string
 
 const (
-	ContextChecker = Context("CHECKER")
+	ContextChecker = Context("CHECKER") // TODO : rethink (we have 3 DIFFERENT MockCheckers!)
+	ContextIteratorMockIterator = Context("MOCK_ITERATOR")
+	ContextIteratorNumberIterator = Context("NUMBER_ITERATOR")
 )
 
-// Context creation.
 var (
-	ctx = context.WithValue(context.Background(), ContextChecker, mocks.NewMockChecker())
+	ctx = context.WithValue(context.Background(), ContextIteratorMockIterator, mocks.NewMockIterator())
+	// We can add ContextIteratorNumberIterator to ctx when we deal with our number iterator
 )
 
-func FromContext(ctx context.Context) Checker {
-	return ctx.Value(ContextChecker).(Checker)
+func FromContext(ctx context.Context) Iterator {
+	return ctx.Value(ContextIteratorMockIterator).(Iterator)
 }
