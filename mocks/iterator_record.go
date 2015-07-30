@@ -1,4 +1,5 @@
 package mocks
+
 import "errors"
 
 func NewMockEmptyIterator() *Iterator {
@@ -27,10 +28,10 @@ func NewMockFilledIterator() *Iterator {
 	return mockObj
 }
 
-func NewMockWithErrorIterator() *Iterator{
+func NewMockWithErrorIterator() *Iterator {
 	mockObj := new(Iterator)
 	mockObj.On("Name").Return("Mock iterator with error")
 	mockObj.On("Count").Return(mock.Count)
-	mockObj.On("Next",mock.Step).Return(errors.New(NewMockBadDoc()))
+	mockObj.On("Next", mock.Step).Return(errors.New(NewMockBadDoc()))
 	return mockObj
 }
