@@ -12,7 +12,11 @@ func NewValidDoc() *Checker {
 }
 
 // TODO: implement InvalidDoc as a MockChecker
-
+func NewInvalidDoc() *Checker {
+	mockObj := new(Checker)
+	mockObj.On("Check").Return(mock.Problem, nil)
+	return  mockObj
+}
 
 func NewBadDoc() *Checker {
 	mockObj := new(Checker)
