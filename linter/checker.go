@@ -10,6 +10,6 @@ type Checker interface {
 }
 
 func Check(ctx context.Context) ([]*Problem, error){
-	return FromContext(ctx).Check() // TODO: see context.go
+	return CheckerFromContext(ctx).Check() // TODO: see context.go
 }
 

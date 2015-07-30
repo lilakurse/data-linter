@@ -11,13 +11,13 @@ type Iterator interface {
 }
 
 func Name(ctx context.Context) string {
-	return FromContext(ctx).Name()
+	return IteratorFromContext(ctx).Name()
 }
 
 func Count(ctx context.Context) int64{
-	return FromContext(ctx).Count()
+	return IteratorFromContext(ctx).Count()
 }
 
 func Next(ctx context.Context, step int) []*Checker {
-	return FromContext(ctx).Next(step)
+	return IteratorFromContext(ctx).Next(step)
 }
