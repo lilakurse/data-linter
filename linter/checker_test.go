@@ -4,6 +4,7 @@ import (
 	"github.com/GabbyyLS/data-linter/linter/mocks"
 	"reflect"
 	"testing"
+	"github.com/GabbyyLS/data-linter/mock"
 )
 
 var (
@@ -18,7 +19,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is valid, there should be no errors")
 	}
-	if !reflect.DeepEqual(problems, mocks.EmptyProblemList) {
+	if !reflect.DeepEqual(problems, mock.EmptyProblemList) {
 		t.Error("The problem list should be empty")
 	}
 
@@ -27,7 +28,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is invalid, but there should be no errors")
 	}
-	if !reflect.DeepEqual(problems, mocks.Problems) {
+	if !reflect.DeepEqual(problems, mock.Problems) {
 		t.Error("The problem list should be empty")
 	}
 
