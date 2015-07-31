@@ -2,34 +2,41 @@ package linter
 
 import (
 	"github.com/GabbyyLS/data-linter/linter/mocks"
-//	"github.com/GabbyyLS/data-linter/mock"
-	"testing"
 	"reflect"
+	"testing"
 )
 
-var mockValidDoc = Checker(mocks.NewMockValidDoc())
+var (
+	mockValidDoc   = Checker(mocks.NewMockValidDoc())
+	mockInvalidDoc = Checker(mocks.NewMockInvalidDoc())
+	mockBadDoc     = Checker(mocks.NewMockBadDoc())
+)
 
 func TestCheck(t *testing.T) {
 	// Valid document
 	problems, err := Check(mockValidDoc) // fix error Multiple-value Check()in single value context
 	if err != nil {
-		t.Error("The doc is valid, there should be no error")
+		t.Error("The doc is valid, there should be no errors")
 	}
 	if !reflect.DeepEqual(problems, mocks.EmptyProblemList) {
 		t.Error("The problem list should be empty")
 	}
 
-
-
 	// Invalid document
-//	check, err = Check(ctx, mock.InvalidDoc)
-//	if err == nil || check != nil {
-//		t.Error("Invalid document")
-//	}
+	problems, err = Check(mockInvalidDoc)
+	if err != nil {
+		t.Error("The doc is invalid, but there should be no errors")
+	}
+	if !reflect.DeepEqual(problems, mocks.Problems) {
+		t.Error("The problem list should be empty")
+	}
 
 	// Bad document
-//	check, err = Check(ctx, mock.BadDoc)
-//	if err != nil || check == nil {
-//		t.Error("Error")
-//	}
+	problems, err = Check(mockBadDoc)
+	if err == nil {
+		t.Error("There should be an error")
+	}
+	if problems != nil {
+		t.Error("Problem list should be nil -- the doc contains an error")
+	}
 }
