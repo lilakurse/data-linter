@@ -2,7 +2,7 @@ package mock
 
 import (
 	"github.com/GabbyyLS/data-linter/models"
-	"github.com/GabbyyLS/data-linter/linter/checker"
+//	"github.com/GabbyyLS/data-linter/linter/checker"
 	"fmt"
 )
 
@@ -21,12 +21,12 @@ func (mockChecker MockChecker) Check() ([]*models.Problem, error) {
 	return Problems, nil
 }
 
-func getMockCheckerList() []*checker.Checker {
-	checkerList := []*checker.Checker{}
+func getMockCheckerList() []*MockChecker {
+	checkerList := []*MockChecker{}
 
 	for i := 0; i < Step; i++ {
-		checker := checker.Checker(MockChecker{Name: fmt.Sprintf("Mock Checker #%d", i)})
-		checkerList = append(checkerList, &checker)
+//		checker := checker.Checker()
+		checkerList = append(checkerList, &MockChecker{Name: fmt.Sprintf("Mock Checker #%d", i)})
 	}
 
 	return checkerList
