@@ -1,4 +1,4 @@
-package linter
+package checker
 
 import "github.com/GabbyyLS/data-linter/models"
 

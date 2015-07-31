@@ -1,7 +1,7 @@
-package linter
+package checker
 
 import (
-	"github.com/GabbyyLS/data-linter/linter/mocks"
+	"github.com/GabbyyLS/data-linter/linter/checker/mocks"
 	"reflect"
 	"testing"
 	"github.com/GabbyyLS/data-linter/mock"
@@ -15,7 +15,7 @@ var (
 
 func TestCheck(t *testing.T) {
 	// Valid document
-	problems, err := Check(mockValidDoc) // fix error Multiple-value Check()in single value context
+	problems, err := Check(mockValidDoc)
 	if err != nil {
 		t.Error("The doc is valid, there should be no errors")
 	}

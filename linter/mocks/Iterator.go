@@ -2,6 +2,8 @@ package mocks
 
 import "github.com/stretchr/testify/mock"
 
+import "github.com/GabbyyLS/data-linter/linter/checker"
+
 type Iterator struct {
 	mock.Mock
 }
@@ -13,19 +15,19 @@ func (m *Iterator) Name() string {
 
 	return r0
 }
-func (m *Iterator) Count() int64 {
+func (m *Iterator) Count() int {
 	ret := m.Called()
 
-	r0 := ret.Get(0).(int64)
+	r0 := ret.Get(0).(int)
 
 	return r0
 }
-func (m *Iterator) Next(step int) []*Checker {
+func (m *Iterator) Next(step int) []*checker.Checker {
 	ret := m.Called(step)
 
-	var r0 []*Checker
+	var r0 []*checker.Checker
 	if ret.Get(0) != nil {
-		r0 = ret.Get(0).([]*Checker)
+		r0 = ret.Get(0).([]*checker.Checker)
 	}
 
 	return r0

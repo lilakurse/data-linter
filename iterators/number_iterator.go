@@ -18,6 +18,7 @@ type Generator struct {
 	Count int64
 }
 
+// TODO: resolve types
 func (n Number) Check() ([]*linter.Problem, error) {
 	err := nil
 	problems := []*linter.Problem{}

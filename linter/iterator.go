@@ -1,14 +1,14 @@
 package linter
 
-//import (
-//	"golang.org/x/net/context"
-//)
+import (
+	"github.com/GabbyyLS/data-linter/linter/checker"
+)
 
 // Iterator contains documents and provides them in fixed-sized batches.
 type Iterator interface {
 	Name() string
 	Count() int
-	Next(step int) []*Checker
+	Next(step int) []*checker.Checker
 }
 
 //func Name(ctx context.Context) string {
@@ -31,6 +31,6 @@ func Count(iterator Iterator) int{
 //	return IteratorFromContext(ctx).Next(step)
 //}
 
-func Next(iterator Iterator, step int) []*Checker {
+func Next(iterator Iterator, step int) []*checker.Checker {
 	return iterator.Next(step)
 }

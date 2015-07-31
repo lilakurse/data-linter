@@ -7,7 +7,7 @@ import (
 
 func NewMockValidDoc() *Checker {
 	mockObj := new(Checker)
-	mockObj.On("Check").Return(mock.EmptyProblemList, nil)
+	mockObj.On("Check").Return(mock.EmptyProblemList, nil) // TODO: nil, nil or leave as is?
 	return mockObj
 }
 
