@@ -1,11 +1,13 @@
 package linter
 
+import "github.com/GabbyyLS/data-linter/models"
+
 const Step = 50
 
 // Inspect runs through the iterator and collects problems for report.
-func Inspect(iterator Iterator) ([]*Problem, error) {
+func Inspect(iterator Iterator) ([]*models.Problem, error) {
 	docsChecked := 0
-	problemsToCommit := []*Problem{}
+	problemsToCommit := []*models.Problem{}
 	for docsChecked <= iterator.Count() {
 		for _, document := range iterator.Next(Step) {
 			docToCheck := *document
