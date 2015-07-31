@@ -17,6 +17,7 @@ func Inspect(iterator Iterator) ([]*models.Problem, error) {
 			}
 			problemsToCommit = append(problemsToCommit, docProblems...)
 		}
+		// TODO: We need to commit here!
 		docsChecked += Step
 	}
 	return problemsToCommit, nil
