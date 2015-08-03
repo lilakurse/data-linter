@@ -1,8 +1,8 @@
 package linter
 
 import (
-	"time"
 	"github.com/GabbyyLS/data-linter/models"
+	"time"
 )
 
 // Reporter embeds read and write functionality for reports.
@@ -18,6 +18,17 @@ type ReportWriter interface {
 	Commit(*models.Report, []*models.Problem) error
 }
 
+func Start(reportWriter ReportWriter) (*models.Report, error) {
+	return reportWriter.Start()
+}
+func Finish(reportWriter ReportWriter, report *models.Report) error {
+	return reportWriter.Finish(report)
+}
+
+func Commit(reportWriter ReportWriter, report *models.Report, problem []*models.Problem) error {
+	return reportWriter.Commit(report, problem)
+}
+
 // ReportReader provides functionality for accessing various report-related information.
 type ReportReader interface {
 	GetAllReports() []*models.Report
@@ -27,4 +38,3 @@ type ReportReader interface {
 	GetReportByCommitTime(time *time.Time) *models.Report
 	TotalReportsCount() *models.ReportsCount
 }
-

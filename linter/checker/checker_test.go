@@ -2,9 +2,9 @@ package checker
 
 import (
 	"github.com/GabbyyLS/data-linter/linter/checker/mocks"
-	"reflect"
+	//"github.com/GabbyyLS/data-linter/mock"
+	//"reflect"
 	"testing"
-	"github.com/GabbyyLS/data-linter/mock"
 )
 
 var (
@@ -19,7 +19,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is valid, there should be no errors")
 	}
-	if !reflect.DeepEqual(problems, mock.EmptyProblemList) {
+	if len(problems) == 0 {
 		t.Error("The problem list should be empty")
 	}
 
@@ -28,7 +28,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is invalid, but there should be no errors")
 	}
-	if !reflect.DeepEqual(problems, mock.Problems) {
+	if len(problems) != 0 {
 		t.Error("The problem list should be empty")
 	}
 
@@ -40,4 +40,5 @@ func TestCheck(t *testing.T) {
 	if problems != nil {
 		t.Error("Problem list should be nil -- the doc contains an error")
 	}
+
 }
