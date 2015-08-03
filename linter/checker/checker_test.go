@@ -19,7 +19,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is valid, there should be no errors")
 	}
-	if len(problems) == 0 {
+	if len(problems) != 0 {
 		t.Error("The problem list should be empty")
 	}
 
@@ -28,7 +28,7 @@ func TestCheck(t *testing.T) {
 	if err != nil {
 		t.Error("The doc is invalid, but there should be no errors")
 	}
-	if len(problems) != 0 {
+	if len(problems) == 0 {
 		t.Error("The problem list should be empty")
 	}
 
