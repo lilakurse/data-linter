@@ -9,18 +9,18 @@ import (
 // Writer with empty list of problems.
 func NewMockReportWriter() *ReportWriter {
 	mockObj := new(ReportWriter)
-	mockObj.On("Start").Return(mock.Report, nil)
-	mockObj.On("Finish", mock.Report).Return(nil)
-	mockObj.On("Commit", mock.Report, []*models.Problem{}).Return(nil)
+	mockObj.On("Start").Return(mock.ReportWithNoProblems, nil)
+	mockObj.On("Finish", mock.ReportWithNoProblems).Return(nil)
+	mockObj.On("Commit", mock.ReportWithNoProblems, []*models.Problem{}).Return(nil)
 	return mockObj
 }
 
 // Writer with some problems.
 func NewMockWithProblemRepotWriter() *ReportWriter {
 	mockObj := new(ReportWriter)
-	mockObj.On("Start").Return(mock.Report, nil)
-	mockObj.On("Finish", mock.Report).Return(nil)
-	mockObj.On("Commit", mock.Report, mock.Problems).Return(errors.New("Report has some problems"))
+	mockObj.On("Start").Return(mock.ReportWithSomeProblems, nil)
+	mockObj.On("Finish", mock.ReportWithSomeProblems).Return(nil)
+	mockObj.On("Commit", mock.ReportWithSomeProblems, mock.Problems).Return(errors.New("Report has some problems"))
 	return mockObj
 }
 
@@ -28,7 +28,7 @@ func NewMockWithProblemRepotWriter() *ReportWriter {
 func NewMockErrorReportWriter() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return([]*models.Report{}, nil)
-	mockObj.On("Finish", mock.Report).Return(nil)
-	mockObj.On("Commit", []*models.Report{}, mock.Problems).Return(errors.New("Report wasn't created due to the error/problems"))
+	mockObj.On("Finish", mock.UnfinishedReport).Return(nil)
+	mockObj.On("Commit", mock.UnfinishedReport, mock.Problems).Return(errors.New("Report wasn't created due to the error/problems"))
 	return mockObj
 }

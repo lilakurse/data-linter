@@ -25,8 +25,8 @@ func Finish(reportWriter ReportWriter, report *models.Report) error {
 	return reportWriter.Finish(report)
 }
 
-func Commit(reportWriter ReportWriter, report *models.Report, problem []*models.Problem) error {
-	return reportWriter.Commit(report, problem)
+func Commit(reportWriter ReportWriter, report *models.Report, problems []*models.Problem) error {
+	return reportWriter.Commit(report, problems)
 }
 
 // ReportReader provides functionality for accessing various report-related information.
