@@ -12,6 +12,6 @@ var (
 	EmptyProblemList       = []*models.Problem{}
 	Problems               = []*models.Problem{{Original: "A file with a problem"}, {Original: "Another file with a problem"}}
 	ReportWithNoProblems   = models.Report{Name: "Customer", Created: t, Updated: t + 2, Finished: t + 3, Error: "No error", Problems: Problems, Statistics: Statistic}
-	UnfinishedReport       = models.Report{Name: "Orders", Created: t + 3, Updated: t + 4, Finished: t + 5, Error: "Error occured while finishing", Statistics: BadStatistic}
-	ReportWithSomeProblems = models.Report{"Freelamcer", Created: t + 1, Updated: t + 2, Finished: t + 3, Error: "Error some problems occured", Statistics: Statistic}
+	UnfinishedReport       = models.Report{Name: "Orders", Created: t + 3, Updated: t + 4, Finished: t + 5, Error: "Error occured while finishing", Problems:Problems ,Statistics: BadStatistic}
+	ReportWithSomeProblems = models.Report{Name:"Freelancer", Created: t + 1, Updated: t + 2, Finished: t + 3, Error: "Error some problems occured", Statistics: Statistic}
 )
