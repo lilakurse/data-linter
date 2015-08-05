@@ -27,7 +27,7 @@ func NewMockWithProblemRepotWriter() *ReportWriter {
 // Writer with error and no report.
 func NewMockErrorReportWriter() *ReportWriter {
 	mockObj := new(ReportWriter)
-	mockObj.On("Start").Return([]*models.Report{}, nil)
+	mockObj.On("Start").Return(mock.UnfinishedReport, nil)
 	mockObj.On("Finish", mock.UnfinishedReport).Return(nil)
 	mockObj.On("Commit", mock.UnfinishedReport, mock.Problems).Return(errors.New("Report wasn't created due to the error/problems"))
 	return mockObj
