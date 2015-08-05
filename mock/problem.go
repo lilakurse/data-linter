@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	StatisticS             = models.Count{Total: 2, Inspected: 1, Valid: 1, Invalid: 0}
-	BadStatisticS          = models.Count{Total: 1, Inspected: 1, Valid: 0, Invalid: 1}
+	StatisticS             = models.Count{Total: 50, Inspected: 50, Valid: 25, Invalid: 25}
+	BadStatisticS          = models.Count{Total: 50, Inspected: 10, Valid: 5, Invalid: 5}
 	time                   = time.Now()
 	EmptyProblemList       = []*models.Problem{}
 	Problems               = []*models.Problem{{Original: "A file with a problem"}, {Original: "Another file with a problem"}}
