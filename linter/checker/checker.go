@@ -15,7 +15,5 @@ type Checker interface {
 //	return CheckerFromContext(ctx).Check()
 //}
 
-func Check(checker Checker) ([]*models.Problem, error){
-	return checker.Check()
-}
+
 
