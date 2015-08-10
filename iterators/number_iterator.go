@@ -22,13 +22,13 @@ func (n Number) Check() ([]*linter.Problem, error) {
 	err := nil
 	problems := []*linter.Problem{}
 	details := []*linter.ProblemDetails{}
-	if Number/2 != 0 {
+	if n/2 != 0 {
 		problem := new(linter.Problem)
 		detail := new(linter.ProblemDetails)
 		problem.Id = bson.NewObjectId().Hex()
 		detail.Id = "1"
-		problem.Original = strconv.Itoa(Number())
-		detail.Fragment = strconv.Itoa(Number())
+		problem.Original = strconv.Itoa(n)
+		detail.Fragment = strconv.Itoa(n)
 		detail.Description = "not even"
 		details := append(details, detail)
 		problem.Details = details
