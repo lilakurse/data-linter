@@ -10,6 +10,7 @@ var (
 	mockReportWriter            = ReportWriter(mocks.NewMockReportWriter())
 	mockReportWriterWithProblem = ReportWriter(mocks.NewMockWithProblemRepotWriter())
 	mockReportWriterWithError   = ReportWriter(mocks.NewMockErrorReportWriter())
+	mockAllReportReader         = ReportReader(mocks.NewMockAllReportReader())
 )
 
 func TestStart(t *testing.T) {
@@ -68,5 +69,21 @@ func TestCommit(t *testing.T) {
 	err = mockReportWriterWithError.Commit(mock.UnfinishedReport, mock.Problems)
 	if err == nil {
 		t.Errorf("Report should not be created, should have some problems")
+	}
+}
+
+func TestGetAllReports(t *testing.T) {
+	report := mockAllReportReader.GetAllReports()
+	if report == nil {
+		t.Errorf("List of Reports should not be empty")
+	}
+}
+
+// этот тест не проходит
+func TestTotalReportsCount(t *testing.T) {
+	count := mockAllReportReader.TotalReportsCount()
+	sum := count.Failed + count.Successful
+	if sum != count.Total {
+		t.Errorf("Total should be equal to the sum of successful and failed")
 	}
 }
