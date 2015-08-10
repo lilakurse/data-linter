@@ -13,7 +13,7 @@ var (
 
 func TestStart(t *testing.T) {
 	// ReportWriter with empty list of problems
-	start, err := Start(mockReportWriter)
+	start, err := mockReportWriter.Start()
 	if err != nil {
 		 t.Errorf("Report has problems")
 	}
@@ -21,7 +21,7 @@ func TestStart(t *testing.T) {
 		 t.Errorf("Report has problems")
 	}
 	// ReportWriter with some problems
-	start, err = Start(mockReportWriterWithProblem)
+	start, err = mockReportWriterWithProblem.Start()
 	if err != nil {
 		 t.Errorf("Error")
 	}
@@ -29,7 +29,7 @@ func TestStart(t *testing.T) {
 		 t.Errorf("Report has problems")
 	}
 	// ReportWriter with errors
-	start, err = Start(mockReportWriterWithError)
+	start, err = mockReportWriterWithError.Start()
 	if err != nil {
 		 t.Errorf("Error")
 	}
