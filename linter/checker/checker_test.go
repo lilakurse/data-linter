@@ -15,7 +15,7 @@ var (
 
 func TestCheck(t *testing.T) {
 	// Valid document
-	problems, err := Check(mockValidDoc)
+	problems, err := mockValidDoc.Check()
 	if err != nil {
 		t.Error("The doc is valid, there should be no errors")
 	}
@@ -24,7 +24,7 @@ func TestCheck(t *testing.T) {
 	}
 
 	// Invalid document
-	problems, err = Check(mockInvalidDoc)
+	problems, err = mockInvalidDoc.Check()
 	if err != nil {
 		t.Error("The doc is invalid, but there should be no errors")
 	}
@@ -33,7 +33,7 @@ func TestCheck(t *testing.T) {
 	}
 
 	// Bad document
-	problems, err = Check(mockBadDoc)
+	problems, err = mockBadDoc.Check()
 	if err == nil {
 		t.Error("There should be an error")
 	}
