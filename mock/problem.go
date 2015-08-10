@@ -21,9 +21,9 @@ func NewReportWithNoProblems()*models.Report{
 	report.Name="Customers"
 	created:=time.Now().UTC()
 	report.Created=&created
-	updated:=time.Now().UTC() // need to fix time
+	updated:=time.Now().UTC().AddDate(0,0,2) // need to fix time
 	report.Updated=&updated
-	finished:=time.Now().UTC() // need to fix time
+	finished:=time.Now().UTC().AddDate(0,0,1) // need to fix time
 	report.Finished=&finished
 	report.Error="No error"
 	report.Problems= EmptyProblemList
@@ -37,9 +37,9 @@ func NewReportWithProblems()*models.Report{
 	report.Name="Freelancers"
 	created:=time.Now().UTC()
 	report.Created=&created
-	updated:=time.Now().UTC() // need to fix time
+	updated:=time.Now().UTC().AddDate(0,0,1)// need to fix time
 	report.Updated=&updated
-	finished:=time.Now().UTC() // need to fix time
+	finished:=time.Now().UTC().AddDate(0,0,1) // need to fix time
 	report.Finished=&finished
 	report.Error="Some problems found"
 	report.Statistics= StatisticS
@@ -52,10 +52,8 @@ func NewReportWithError()*models.Report{
 	report.Name="Orders"
 	created:=time.Now().UTC()
 	report.Created=&created
-	updated:=time.Now().UTC() // need to fix time
+	updated:=time.Now().UTC().AddDate(0,0,1) // need to fix time
 	report.Updated=&updated
-	finished:=time.Now().UTC() // need to fix time
-	report.Finished=&finished
 	report.Error="Error occured while collecting problems"
 	report.Problems= Problems
 	report.Statistics= UnfinishedStatistics
