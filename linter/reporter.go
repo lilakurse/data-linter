@@ -18,17 +18,6 @@ type ReportWriter interface {
 	Commit(*models.Report, []*models.Problem) error
 }
 
-func Start(reportWriter ReportWriter) (*models.Report, error) {
-	return reportWriter.Start()
-}
-func Finish(reportWriter ReportWriter, report *models.Report) error {
-	return reportWriter.Finish(report)
-}
-
-func Commit(reportWriter ReportWriter, report *models.Report, problems []*models.Problem) error {
-	return reportWriter.Commit(report, problems)
-}
-
 // ReportReader provides functionality for accessing various report-related information.
 type ReportReader interface {
 	GetAllReports() []*models.Report
