@@ -6,8 +6,8 @@ import (
 	"github.com/GabbyyLS/data-linter/models"
 )
 
-// Writer with empty list of problems.
-func NewMockReportWriter() *ReportWriter {
+// ReportWriter with empty list of problems.
+func NewMockReportWriterWithNoProblems() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return(mock.ReportWithNoProblems, nil)
 	mockObj.On("Finish", mock.ReportWithNoProblems).Return(nil)
@@ -15,8 +15,8 @@ func NewMockReportWriter() *ReportWriter {
 	return mockObj
 }
 
-// Writer with some problems.
-func NewMockWithProblemRepotWriter() *ReportWriter {
+// ReportWriter with some problems.
+func NewMockRepotWriterWithProblems() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return(mock.ReportWithSomeProblems, nil)
 	mockObj.On("Finish", mock.ReportWithSomeProblems).Return(nil)
@@ -24,8 +24,8 @@ func NewMockWithProblemRepotWriter() *ReportWriter {
 	return mockObj
 }
 
-// Writer with error and no report.
-func NewMockErrorReportWriter() *ReportWriter {
+// ReportWriter with an error and unfinished report.
+func NewMockReportWriterWithError() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return(mock.UnfinishedReport, nil)
 	mockObj.On("Finish", mock.UnfinishedReport).Return(nil)
