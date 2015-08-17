@@ -6,11 +6,6 @@ import (
 	"github.com/GabbyyLS/data-linter/models"
 )
 
-// Signatures:
-//Start() (*Report, error)
-//Finish(*Report) error
-//Commit(*Report, []*Problem) error
-
 // ReportWriter with an empty list of problems.
 func NewMockReportWriterWithNoProblems() *ReportWriter {
 	mockObj := new(ReportWriter)
@@ -24,16 +19,15 @@ func NewMockReportWriterWithNoProblems() *ReportWriter {
 func NewMockReportWithSomeProblems() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return(mock.ReportWithSomeProblems, nil)
-	mockObj.On("Commit", mock.ReportWithSomeProblems, mock.Problems).Return(errors.New("Report has some problems"))
+	mockObj.On("Commit", mock.ReportWithSomeProblems, mock.Problems).Return(nil)
 	mockObj.On("Finish", mock.ReportWithSomeProblems).Return(nil)
 	return mockObj
 }
 
-// ReportWriter with an error and unfinished report.
 func NewMockReportWriterWithError() *ReportWriter {
 	mockObj := new(ReportWriter)
 	mockObj.On("Start").Return(mock.ReportWithError, nil)
-	mockObj.On("Commit", mock.ReportWithError, mock.Problems).Return(errors.New("Report wasn't created due to the error/problems"))
-	mockObj.On("Finish", mock.ReportWithError).Return(nil)
+	mockObj.On("Commit", mock.ReportWithError, mock.Problems).Return(errors.New("Report was not finshed due to error(s)"))
+	mockObj.On("Finish", mock.ReportWithError).Return(errors.New("Report was not finshed due to error(s)"))
 	return mockObj
 }

@@ -14,8 +14,8 @@ type Reporter struct {
 // ReportWriter instantiates a report, fills it with problems, and closes it.
 type ReportWriter interface {
 	Start() (*models.Report, error)
-	Finish(currentReport *models.Report) (*models.Report, error)
-	Commit(currentReport *models.Report, []*models.Problem) (*models.Report, error)
+	Finish(r *models.Report) error
+	Commit(r *models.Report, p []*models.Problem) error
 }
 
 // ReportReader provides functionality for accessing various report-related information.

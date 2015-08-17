@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	StatsForReportWithNoProblems   = models.Count{Total: 50, Inspected: 50, Valid: 50, Invalid: 0}
-	StatsForReportWithSomeProblems = models.Count{Total: 50, Inspected: 50, Valid: 48, Invalid: 2}
-	StatsForReportWithError        = models.Count{Total: 50, Inspected: 10, Valid: 8, Invalid: 2}
+	StatsForReportWithNoProblems   = models.Statistics{Total: 50, Inspected: 50, Valid: 50, Invalid: 0}
+	StatsForReportWithSomeProblems = models.Statistics{Total: 50, Inspected: 50, Valid: 48, Invalid: 2}
+	StatsForReportWithError        = models.Statistics{Total: 50, Inspected: 10, Valid: 8, Invalid: 2}
 	EmptyProblemList               = []*models.Problem{}
 	Problems                       = []*models.Problem{{Original: "A file with a problem"}, {Original: "Another file with a problem"}}
 	ReportWithNoProblems           = NewReportWithNoProblems()
@@ -19,6 +19,9 @@ var (
 	ReportCount = models.ReportsCount{Total: 3, Failed: 1, Successful: 2}
 )
 
+// The function creates a report as if we have already commited to it at least once and finished it
+// (i.e., report.Finished and report.Updated are already set, report has Statistics, etc.)
+// This is needed for mock-tests.
 func NewReportWithNoProblems() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With No Problems"
@@ -32,7 +35,6 @@ func NewReportWithNoProblems() *models.Report {
 	report.Problems = EmptyProblemList
 	report.Statistics = StatsForReportWithNoProblems
 	return report
-
 }
 
 func NewReportWithSomeProblems() *models.Report {
