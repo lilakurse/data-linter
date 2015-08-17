@@ -9,14 +9,14 @@ func NewMockAllReportReader() *ReportReader {
 	return mockObj
 }
 
-//func NewMockReportReaderNoProblem() *ReportReader {
-//	mockObj := new(ReportReader)
-//	mockObj.On("GetReportByName", mock.ReportWithNoProblems.Name).Return(mock.ReportWithNoProblems)
-//	mockObj.On("GetReportByCreationTime", mock.ReportWithNoProblems.Created).Return(mock.ReportWithNoProblems)
-//	mockObj.On("GetReportByUpdateTime", mock.ReportWithNoProblems.Updated).Return(mock.ReportWithNoProblems)
-//	mockObj.On("GetReportByCommitTime", mock.ReportWithNoProblems.Finished).Return(mock.ReportWithNoProblems)
-//	return mockObj
-//}
+func NewMockReportReaderNoProblem() *ReportReader {
+	mockObj := new(ReportReader)
+	mockObj.On("GetReportByName", mock.ReportWithNoProblems.Name).Return(mock.ReportWithNoProblems)
+	mockObj.On("GetReportByCreationTime", mock.ReportWithNoProblems.Created).Return(mock.ReportWithNoProblems)
+	mockObj.On("GetReportByUpdateTime", mock.ReportWithNoProblems.Updated).Return(mock.ReportWithNoProblems)
+	mockObj.On("GetReportByCommitTime", mock.ReportWithNoProblems.Finished).Return(mock.ReportWithNoProblems)
+	return mockObj
+}
 //
 //func NewMockReportReaderWithProblem() *ReportReader {
 //	mockObj := new(ReportReader)

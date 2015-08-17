@@ -16,6 +16,9 @@ var (
 	ReportWithError                = NewReportWithError()
 	ListOfReports                  = []*models.Report{ReportWithNoProblems, ReportWithSomeProblems, ReportWithError}
 	ReportCount                    = &models.ReportsCount{Total: 3, Failed: 1, Successful: 2}
+	Created                        time.Time
+	Updated                        time.Time
+	Finished                       time.Time
 )
 
 // The function creates a report as if we have already commited to it at least once and finished it
@@ -24,12 +27,12 @@ var (
 func NewReportWithNoProblems() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With No Problems"
-	created := time.Now().UTC()
-	report.Created = &created
-	updated := time.Now().UTC().AddDate(0, 0, 1)
-	report.Updated = &updated
-	finished := time.Now().UTC().AddDate(0, 0, 2)
-	report.Finished = &finished
+	Created = time.Date(2015, 11, 01, 14, 55, 13, 0, time.Local)
+	report.Created = &Created
+	Updated = time.Date(2015, 11, 02, 14, 55, 13, 0, time.Local)
+	report.Updated = &Updated
+	Finished = time.Date(2015, 11, 02, 21, 00, 00, 0, time.Local)
+	report.Finished = &Finished
 	report.Error = ""
 	report.Problems = EmptyProblemList
 	report.Statistics = StatsForReportWithNoProblems

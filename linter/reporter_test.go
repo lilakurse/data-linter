@@ -12,7 +12,7 @@ var (
 	mockReportWriterWithError      = ReportWriter(mocks.NewMockReportWriterWithError())
 	mockReportReader               = ReportReader(mocks.NewMockAllReportReader())
 
-//	mockReportReaderNoProblem      = ReportReader((mocks.NewMockReportReaderNoProblem()))
+	mockReportReaderNoProblem      = ReportReader((mocks.NewMockReportReaderNoProblem()))
 //	mockReportReaderWithProblem    = ReportReader(mocks.NewMockReportReaderWithProblem())
 //	mockReportReaderWithError      = ReportReader(mocks.NewMockReportReaderWithError())
 )
@@ -134,11 +134,11 @@ func TestTotalReportsCount(t *testing.T) {
 	}
 }
 
-//func TestGetReportByName(t *testing.T) {
-//	report := mockReportReaderNoProblem.GetReportByName(mock.ReportWithNoProblems.Name)
-//	if report.Name == "" {
-//		t.Errorf("Report should have a name")
-//	}
+func TestGetReportByName(t *testing.T) {
+	report := mockReportReaderNoProblem.GetReportByName(mock.ReportWithNoProblems.Name)
+	if report.Name == "" {
+		t.Errorf("Report should have a name")
+	}
 //	report = mockReportReaderWithProblem.GetReportByName(mock.ReportWithSomeProblems.Name)
 //	if report.Name == "" {
 //		t.Errorf("Report should have a name")
@@ -147,13 +147,13 @@ func TestTotalReportsCount(t *testing.T) {
 //	if report.Name == "" {
 //		t.Errorf("Report should have a name")
 //	}
-//}
-//
-//func TestGetReportByCreationTime(t *testing.T) {
-//	report := mockReportReaderNoProblem.GetReportByCreationTime(mock.ReportWithNoProblems.Created)
-//	if report.Created == nil {
-//		t.Errorf("Report doesn't exist")
-//	}
+}
+
+func TestGetReportByCreationTime(t *testing.T) {
+	report := mockReportReaderNoProblem.GetReportByCreationTime(mock.ReportWithNoProblems.Created)
+	if report.Created == nil {
+		t.Errorf("Report doesn't exist")
+	}
 //	report = mockReportReaderWithProblem.GetReportByCreationTime(mock.ReportWithSomeProblems.Created)
 //	if report.Created == nil {
 //		t.Errorf("Report doesn't exist")
@@ -162,7 +162,7 @@ func TestTotalReportsCount(t *testing.T) {
 //	if report.Created == nil {
 //		t.Errorf("Report doesn't exist")
 //	}
-//}
+}
 //
 //func TestGetReportByUpdateTime(t *testing.T) {
 //	report := mockReportReaderNoProblem.GetReportByUpdateTime(mock.ReportWithNoProblems.Updated)
