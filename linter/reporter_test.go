@@ -7,70 +7,76 @@ import (
 )
 
 var (
-	mockReportWriter            = ReportWriter(mocks.NewMockReportWriterWithNoProblems())
-	mockReportWriterWithProblem = ReportWriter(mocks.NewMockRepotWriterWithProblems())
-	mockReportWriterWithError   = ReportWriter(mocks.NewMockReportWriterWithError())
-	mockAllReportReader         = ReportReader(mocks.NewMockAllReportReader())
-	mockReportReaderNoProblem   = ReportReader((mocks.NewMockReportReaderNoProblem()))
-	mockReportReaderWithProblem = ReportReader(mocks.NewMockReportReaderWithProblem())
-	mockReportReaderWithError   = ReportReader(mocks.NewMockReportReaderWithError())
+	mockReportWriterWithNoProblems = ReportWriter(mocks.NewMockReportWriterWithNoProblems())
+	mockReportWithSomeProblems     = ReportWriter(mocks.NewMockReportWithSomeProblems())
+	mockReportWriterWithError      = ReportWriter(mocks.NewMockReportWriterWithError())
+	mockAllReportReader            = ReportReader(mocks.NewMockAllReportReader())
+	mockReportReaderNoProblem      = ReportReader((mocks.NewMockReportReaderNoProblem()))
+	mockReportReaderWithProblem    = ReportReader(mocks.NewMockReportReaderWithProblem())
+	mockReportReaderWithError      = ReportReader(mocks.NewMockReportReaderWithError())
 )
 
 func TestStart(t *testing.T) {
-	// ReportWriter with empty list of problems
-	report, err := mockReportWriter.Start()
+	// ReportWriter with an empty list of problems
+	_, err := mockReportWriterWithNoProblems.Start()
 	if err != nil {
-		t.Errorf("This report should have no problems")
+		t.Errorf("Report should have started with no problems")
 	}
-	if report.Statistics.Total != report.Statistics.Inspected ||
-		report.Statistics.Valid == 0 {
-		t.Errorf("Report has problems")
-	}
+
 	// ReportWriter with some problems
-	report, err = mockReportWriterWithProblem.Start()
+	_, err = mockReportWithSomeProblems.Start()
 	if err != nil {
-		t.Errorf("Error")
+		t.Errorf("Report should have started with no problems")
 	}
-	if report.Statistics.Total != report.Statistics.Inspected || report.Statistics.Invalid == 0 { //not sure about second part
-		t.Errorf("Report has problems")
-	}
+
 	// ReportWriter with errors
-	report, err = mockReportWriterWithError.Start()
+	_, err = mockReportWriterWithError.Start()
 	if err != nil {
-		t.Errorf("Error")
+		t.Errorf("Report should have started with no problems")
 	}
-	if report.Statistics.Total == report.Statistics.Inspected {
-		t.Errorf("Statistics should not be equal")
-	}
+
 }
 
 func TestFinish(t *testing.T) {
-	err := mockReportWriter.Finish(mock.ReportWithNoProblems)
+
+	// Finish(*Report) error
+
+	err := mockReportWriterWithNoProblems.Finish(mock.ReportWithNoProblems)
 	if err != nil {
 		t.Errorf("Error found while finishing")
 	}
 	// Report with problems.
-	err = mockReportWriterWithProblem.Finish(mock.ReportWithSomeProblems)
+	err = mockReportWithSomeProblems.Finish(mock.ReportWithSomeProblems)
 	if err != nil {
 		t.Errorf("Error found while finishing")
 	}
 	// UnfinishedReport.
-	err = mockReportWriterWithError.Finish(mock.UnfinishedReport)
+	err = mockReportWriterWithError.Finish(mock.ReportWithError)
 	if err != nil {
 		t.Errorf("Error found")
 	}
+
+	// TODO: rewrite this check
+	if report.Statistics.Total != report.Statistics.Inspected ||
+		report.Statistics.Valid == 0 {
+		t.Errorf("Report should have registered 2 problems")
+	}
+
 }
 
 func TestCommit(t *testing.T) {
-	err := mockReportWriter.Commit(mock.ReportWithNoProblems, mock.EmptyProblemList)
+
+	// Commit(*Report, []*Problem) error
+
+	err := mockReportWriterWithNoProblems.Commit(mock.ReportWithNoProblems, mock.EmptyProblemList)
 	if err != nil {
 		t.Errorf("Error occured while commiting")
 	}
-	err = mockReportWriterWithProblem.Commit(mock.ReportWithSomeProblems, mock.Problems)
+	err = mockReportWithSomeProblems.Commit(mock.ReportWithSomeProblems, mock.Problems)
 	if err == nil {
 		t.Errorf("Should have some problems")
 	}
-	err = mockReportWriterWithError.Commit(mock.UnfinishedReport, mock.Problems)
+	err = mockReportWriterWithError.Commit(mock.ReportWithError, mock.Problems)
 	if err == nil {
 		t.Errorf("Report should not be created, should have some problems")
 	}
@@ -101,7 +107,7 @@ func TestGetReportByName(t *testing.T) {
 	if report.Name == "" {
 		t.Errorf("Report should have a name")
 	}
-	report = mockReportReaderWithError.GetReportByName(mock.UnfinishedReport.Name)
+	report = mockReportReaderWithError.GetReportByName(mock.ReportWithError.Name)
 	if report.Name == "" {
 		t.Errorf("Report should have a name")
 	}
@@ -116,7 +122,7 @@ func TestGetReportByCreationTime(t *testing.T) {
 	if report.Created == nil {
 		t.Errorf("Report doesn't exist")
 	}
-	report = mockReportReaderWithError.GetReportByCreationTime(mock.UnfinishedReport.Created)
+	report = mockReportReaderWithError.GetReportByCreationTime(mock.ReportWithError.Created)
 	if report.Created == nil {
 		t.Errorf("Report doesn't exist")
 	}
@@ -131,7 +137,7 @@ func TestGetReportByUpdateTime(t *testing.T) {
 	if report.Updated == nil {
 		t.Errorf("Report is old")
 	}
-	report = mockReportReaderWithError.GetReportByUpdateTime(mock.UnfinishedReport.Updated)
+	report = mockReportReaderWithError.GetReportByUpdateTime(mock.ReportWithError.Updated)
 	if report.Updated == nil {
 		t.Errorf("Report is old")
 	}
@@ -146,7 +152,7 @@ func TestGetReportByCommitTime(t *testing.T) {
 	if report.Finished == nil {
 		t.Errorf("Report has some problems")
 	}
-	report = mockReportReaderWithError.GetReportByCommitTime(mock.UnfinishedReport.Finished)
+	report = mockReportReaderWithError.GetReportByCommitTime(mock.ReportWithError.Finished)
 	if report.Finished != nil {
 		t.Errorf("Finished time should be nil")
 	}

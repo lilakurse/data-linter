@@ -28,9 +28,9 @@ func NewMockReportReaderWithProblem() *ReportReader {
 }
 func NewMockReportReaderWithError() *ReportReader {
 	mockObj := new(ReportReader)
-	mockObj.On("GetReportByName", mock.UnfinishedReport.Name).Return(mock.UnfinishedReport)
-	mockObj.On("GetReportByCreationTime", mock.UnfinishedReport.Created).Return(mock.UnfinishedReport)
-	mockObj.On("GetReportByUpdateTime", mock.UnfinishedReport.Updated).Return(mock.UnfinishedReport)
-	mockObj.On("GetReportByCommitTime", mock.UnfinishedReport.Finished).Return(mock.UnfinishedReport)
+	mockObj.On("GetReportByName", mock.ReportWithError.Name).Return(mock.ReportWithError)
+	mockObj.On("GetReportByCreationTime", mock.ReportWithError.Created).Return(mock.ReportWithError)
+	mockObj.On("GetReportByUpdateTime", mock.ReportWithError.Updated).Return(mock.ReportWithError)
+	mockObj.On("GetReportByCommitTime", mock.ReportWithError.Finished).Return(mock.ReportWithError)
 	return mockObj
 }

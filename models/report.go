@@ -13,11 +13,11 @@ type Report struct {
 	Finished   *time.Time
 	Error      string
 	Problems   []*Problem
-	Statistics Count
+	Statistics Statistics
 }
 
-// Count contains numeric information on inspected documents.
-type Count struct {
+// Statistics contain numeric information on inspected documents.
+type Statistics struct {
 	Total     int64
 	Inspected int64
 	Valid     int64
