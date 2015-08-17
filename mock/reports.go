@@ -45,12 +45,12 @@ func NewReportWithNoProblems() *models.Report {
 func NewReportWithSomeProblems() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With Some Problems"
-	created := time.Now().UTC()
-	report.Created = &created
-	updated := time.Now().UTC().AddDate(0, 0, 1)
-	report.Updated = &updated
-	finished := time.Now().UTC().AddDate(0, 0, 2)
-	report.Finished = &finished
+	Created = time.Date(2016, time.January, 13, 12, 10, 00, 00, time.UTC)
+	report.Created = &Created
+	Updated = time.Date(2016, time.January, 12, 12, 10, 00, 00, time.UTC)
+	report.Updated = &Updated
+	Finished = time.Date(2016, time.January, 12, 18, 00, 00, 00, time.UTC)
+	report.Finished = &Finished
 	report.Problems = Problems
 	report.Error = ""
 	report.Statistics = StatsForReportWithSomeProblems
@@ -64,10 +64,10 @@ func NewReportWithSomeProblems() *models.Report {
 func NewReportWithError() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With Error"
-	created := time.Now().UTC()
-	report.Created = &created
-	updated := time.Now().UTC().AddDate(0, 0, 1)
-	report.Updated = &updated
+	Created = time.Date(2015, time.October, 05, 10, 00, 45, 00, time.UTC)
+	report.Created = &Created
+	Updated = time.Date(2015, time.October, 06, 10, 00, 00, 00, time.UTC)
+	report.Updated = &Updated
 	report.Error = "An error occured while collecting problems -- report is partial!"
 	report.Problems = Problems
 	report.Statistics = StatsForReportWithError
