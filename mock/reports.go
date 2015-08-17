@@ -14,9 +14,8 @@ var (
 	ReportWithNoProblems           = NewReportWithNoProblems()
 	ReportWithSomeProblems         = NewReportWithSomeProblems()
 	ReportWithError                = NewReportWithError()
-	ListOfReports                  = []*models.Report{} // не знаю как сделать слайс репортов
-	//ListOfReports          = append(ListOfReports, ReportWithNoProblems, UnfinishedReport, ReportWithSomeProblems)
-	ReportCount = models.ReportsCount{Total: 3, Failed: 1, Successful: 2}
+	ListOfReports                  = []*models.Report{ReportWithNoProblems, ReportWithSomeProblems, ReportWithError}
+	ReportCount                    = &models.ReportsCount{Total: 3, Failed: 1, Successful: 2}
 )
 
 // The function creates a report as if we have already commited to it at least once and finished it

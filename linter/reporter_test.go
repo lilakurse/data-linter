@@ -10,10 +10,11 @@ var (
 	mockReportWriterWithNoProblems = ReportWriter(mocks.NewMockReportWriterWithNoProblems())
 	mockReportWithSomeProblems     = ReportWriter(mocks.NewMockReportWithSomeProblems())
 	mockReportWriterWithError      = ReportWriter(mocks.NewMockReportWriterWithError())
-	mockAllReportReader            = ReportReader(mocks.NewMockAllReportReader())
-	mockReportReaderNoProblem      = ReportReader((mocks.NewMockReportReaderNoProblem()))
-	mockReportReaderWithProblem    = ReportReader(mocks.NewMockReportReaderWithProblem())
-	mockReportReaderWithError      = ReportReader(mocks.NewMockReportReaderWithError())
+	mockReportReader               = ReportReader(mocks.NewMockAllReportReader())
+
+//	mockReportReaderNoProblem      = ReportReader((mocks.NewMockReportReaderNoProblem()))
+//	mockReportReaderWithProblem    = ReportReader(mocks.NewMockReportReaderWithProblem())
+//	mockReportReaderWithError      = ReportReader(mocks.NewMockReportReaderWithError())
 )
 
 func TestStart(t *testing.T) {
@@ -99,11 +100,11 @@ func TestFinish(t *testing.T) {
 
 	err = mockReportWriterWithError.Finish(mock.ReportWithError)
 	if err == nil {
-		t.Errorf("Error found")
+		t.Errorf("There should be an error")
 	}
 
 	if mock.NewReportWithError().Error == "" {
-		t.Errorf("Report should have errors")
+		t.Errorf("Report should contain an error")
 	}
 
 	if mock.NewReportWithError().Statistics.Valid == mock.NewReportWithError().Statistics.Total ||
@@ -116,30 +117,22 @@ func TestFinish(t *testing.T) {
 
 	}
 
-	//	// TODO: rewrite this check
-	//	if report.Statistics.Total != report.Statistics.Inspected ||
-	//	report.Statistics.Valid == 0 {
-	//		t.Errorf("Report should have registered 2 problems")
-	//	}
-
 }
 
-//
-//func TestGetAllReports(t *testing.T) {
-//	report := mockAllReportReader.GetAllReports()
-//	if report == nil {
-//		t.Errorf("List of Reports should not be empty")
-//	}
-//}
+func TestGetAllReports(t *testing.T) {
+	reportList := mockReportReader.GetAllReports()
+	if len(reportList) == 0 {
+		t.Errorf("List of reports should not be empty")
+	}
+}
 
-// TODO: этот тест не проходит
-//func TestTotalReportsCount(t *testing.T) {
-//	count := mockAllReportReader.TotalReportsCount()
-//	sum := count.Failed + count.Successful
-//	if sum != count.Total {
-//		t.Errorf("Total should be equal to the sum of successful and failed")
-//	}
-//}
+func TestTotalReportsCount(t *testing.T) {
+	reportCount := mockReportReader.TotalReportsCount()
+
+	if reportCount.Failed + reportCount.Successful != reportCount.Total {
+		t.Errorf("Total should be equal to the sum of successful and failed")
+	}
+}
 
 //func TestGetReportByName(t *testing.T) {
 //	report := mockReportReaderNoProblem.GetReportByName(mock.ReportWithNoProblems.Name)
