@@ -67,7 +67,7 @@ func TestFinish(t *testing.T) {
 	}
 
 	if mock.NewReportWithNoProblems().Statistics.Valid != mock.NewReportWithNoProblems().Statistics.Total ||
-			mock.NewReportWithNoProblems().Statistics.Invalid != 0 {
+		mock.NewReportWithNoProblems().Statistics.Invalid != 0 {
 		t.Errorf("All docs should be valid")
 	}
 
@@ -79,23 +79,51 @@ func TestFinish(t *testing.T) {
 		t.Errorf("Report should have no errors")
 	}
 
-//	err = mockReportWithSomeProblems.Finish(mock.ReportWithSomeProblems)
-//	if err != nil {
-//		t.Errorf("There should be no error, report is OK")
-//	}
-//
-//	err = mockReportWriterWithError.Finish(mock.ReportWithError)
-//	if err == nil {
-//		t.Errorf("Error found")
-//	}
-//
-//	// TODO: rewrite this check
-//	if report.Statistics.Total != report.Statistics.Inspected ||
-//	report.Statistics.Valid == 0 {
-//		t.Errorf("Report should have registered 2 problems")
-//	}
+	err = mockReportWithSomeProblems.Finish(mock.ReportWithSomeProblems)
+	if err != nil {
+		t.Errorf("There should be no error, report is OK")
+	}
+
+	if mock.NewReportWithSomeProblems().Statistics.Total != mock.NewReportWithSomeProblems().Statistics.Inspected {
+		t.Errorf("Number of inspected docs should be the same as the total number of docs")
+	}
+
+	if mock.NewReportWithSomeProblems().Error != "" {
+		t.Errorf("Report should have no errors")
+	}
+
+	if mock.NewReportWithSomeProblems().Statistics.Valid == mock.NewReportWithSomeProblems().Statistics.Total ||
+		mock.NewReportWithSomeProblems().Statistics.Invalid == 0 {
+		t.Errorf("Some docs should be invalid")
+	}
+
+	err = mockReportWriterWithError.Finish(mock.ReportWithError)
+	if err == nil {
+		t.Errorf("Error found")
+	}
+
+	if mock.NewReportWithError().Error == "" {
+		t.Errorf("Report should have errors")
+	}
+
+	if mock.NewReportWithError().Statistics.Valid == mock.NewReportWithError().Statistics.Total ||
+		mock.NewReportWithError().Statistics.Invalid == 0 {
+		t.Errorf("Some docs should be invalid")
+	}
+
+	if mock.NewReportWithError().Statistics.Total == mock.NewReportWithError().Statistics.Inspected {
+		t.Errorf("Number of inspected docs should not be the same as the total number of docs")
+
+	}
+
+	//	// TODO: rewrite this check
+	//	if report.Statistics.Total != report.Statistics.Inspected ||
+	//	report.Statistics.Valid == 0 {
+	//		t.Errorf("Report should have registered 2 problems")
+	//	}
 
 }
+
 //
 //func TestGetAllReports(t *testing.T) {
 //	report := mockAllReportReader.GetAllReports()
