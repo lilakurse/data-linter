@@ -37,6 +37,9 @@ func NewReportWithNoProblems() *models.Report {
 	return report
 }
 
+// The function creates a report as if we have already commited to it at least once and finished it
+// (i.e., report.Finished and report.Updated are already set, report has Statistics, etc.)
+// This is needed for mock-tests.
 func NewReportWithSomeProblems() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With Some Problems"
@@ -53,6 +56,9 @@ func NewReportWithSomeProblems() *models.Report {
 
 }
 
+// The function creates a report as if we have already commited to it at least once and finished it
+// (i.e., report.Finished and report.Updated are already set, report has Statistics, etc.)
+// This is needed for mock-tests.
 func NewReportWithError() *models.Report {
 	report := new(models.Report)
 	report.Name = "Report With Error"
