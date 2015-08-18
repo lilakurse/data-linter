@@ -1,12 +1,12 @@
 package iterators
 
 import (
-	//"fmt"
-	"github.com/GabbyyLS/data-linter/linter"
 	"gopkg.in/mgo.v2/bson"
 	"math/rand"
 	"strconv"
 	"time"
+	"github.com/GabbyyLS/data-linter/models"
+	"github.com/GabbyyLS/data-linter/linter/checker"
 )
 
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
@@ -18,13 +18,15 @@ type Generator struct {
 	Count int64
 }
 
-func (n Number) Check() ([]*linter.Problem, error) {
-	err := nil
-	problems := []*linter.Problem{}
-	details := []*linter.ProblemDetails{}
+// TODO: resolve types
+func (n Number) Check() ([]*models.Problem, error) {
+	var err error
+	err = nil
+	problems := []*models.Problem{}
+	details := []*models.ProblemDetails{}
 	if n/2 != 0 {
-		problem := new(linter.Problem)
-		detail := new(linter.ProblemDetails)
+		problem := new(models.Problem)
+		detail := new(models.ProblemDetails)
 		problem.Id = bson.NewObjectId().Hex()
 		detail.Id = "1"
 		problem.Original = strconv.Itoa(n)
@@ -46,8 +48,8 @@ func (g *Generator) Count() int64 {
 	return g.Count
 }
 
-func (g *Generator) Next(Step int) []linter.Checker {
-	checkers := []linter.Checker{}
+func (g *Generator) Next(Step int) []checker.Checker {
+	checkers := []checker.Checker{}
 	for i := 0; i < Step; i++ {
 		rand.Seed(time.Now().UnixNano())
 		k := rand.Int()
