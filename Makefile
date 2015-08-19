@@ -2,8 +2,9 @@
 # Targets:
 #       test: Run the tests
 
-all:build
+all: build
 
 test: test_unit
+
 test_unit:
     go test github.com/GabbyyLS/data-linter/linter/...
