@@ -3,7 +3,7 @@ package iterators
 import (
 	"gopkg.in/mgo.v2/bson"
 	"math/rand"
-	"strconv"
+	//"strconv"
 	"time"
 	"github.com/GabbyyLS/data-linter/models"
 	"github.com/GabbyyLS/data-linter/linter/checker"
@@ -14,8 +14,8 @@ import (
 type Number int
 
 type Generator struct {
-	Name  string
-	Count int64
+	NameG  string			// Changed name because of error occuried "Generator has same name for the method and field"
+	CountG int64
 }
 
 // TODO: resolve types
@@ -29,8 +29,8 @@ func (n Number) Check() ([]*models.Problem, error) {
 		detail := new(models.ProblemDetails)
 		problem.Id = bson.NewObjectId().Hex()
 		detail.Id = "1"
-		problem.Original = strconv.Itoa(n)
-		detail.Fragment = strconv.Itoa(n)
+		//problem.Original = strconv.Itoa(n)
+		//detail.Fragment = strconv.Itoa(n)
 		detail.Description = "not even"
 		details := append(details, detail)
 		problem.Details = details
@@ -41,11 +41,11 @@ func (n Number) Check() ([]*models.Problem, error) {
 }
 
 func (g *Generator) Name() string {
-	return g.Name
+	return g.NameG
 }
 
 func (g *Generator) Count() int64 {
-	return g.Count
+	return g.CountG
 }
 
 func (g *Generator) Next(Step int) []checker.Checker {
