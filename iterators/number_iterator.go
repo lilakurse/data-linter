@@ -14,8 +14,8 @@ import (
 type Number int
 
 type Generator struct {
-	NameG  string			// Changed name because of error occuried "Generator has same name for the method and field"
-	CountG int64
+	GeneratorName  string			// Changed name because of error occuried "Generator has same name for the method and field"
+	GeneratorCount int
 }
 
 // TODO: resolve types
@@ -40,12 +40,12 @@ func (n Number) Check() ([]*models.Problem, error) {
 	return nil, err
 }
 
-func (g *Generator) Name() string {
-	return g.NameG
+func (g Generator) Name() string {
+	return g.GeneratorName
 }
 
-func (g *Generator) Count() int64 {
-	return g.CountG
+func (g Generator) Count() int {
+	return g.GeneratorCount
 }
 
 func (g *Generator) Next(Step int) []checker.Checker {
