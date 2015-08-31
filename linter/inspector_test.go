@@ -6,15 +6,14 @@ import (
 )
 
 var (
-	numIterator  Iterator
 	numGenerator iterators.Generator
 )
 
 func TestInspect(t *testing.T) {
-	numIterator.Count()
-	numIterator.Name()
-	numIterator.Next(Step)
-	problem, err := Inspect(numIterator)
+	numGenerator.Count()
+	numGenerator.Name()
+	numGenerator.Next(Step)
+	problem, err := Inspect(numGenerator)
 	if err != nil {
 		t.Error("Should be no error")
 	}
