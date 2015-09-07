@@ -48,8 +48,8 @@ func (g Generator) Count() int {
 	return g.GeneratorCount
 }
 
-func (g *Generator) Next(Step int) []checker.Checker {
-	checkers := []checker.Checker{}
+func (g *Generator) Next(Step int) []*checker.Checker {
+	checkers := []*checker.Checker{}
 	for i := 0; i < Step; i++ {
 		rand.Seed(time.Now().UnixNano())
 		k := rand.Int()
