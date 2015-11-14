@@ -5,6 +5,7 @@ import "github.com/GabbyyLS/data-linter/models"
 const Step = 50
 
 // Inspect runs through the iterator and collects problems for report.
+// TODO: probably need to revise the signature
 func Inspect(iterator Iterator) ([]*models.Problem, error) {
 	docsChecked := 0
 	problemsToCommit := []*models.Problem{}
