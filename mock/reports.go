@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"github.com/GabbyyLS/data-linter/models"
+	"github.com/lilakurse/data-linter/models"
 	"time"
 )
 

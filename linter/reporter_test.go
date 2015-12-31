@@ -1,8 +1,8 @@
 package linter
 
 import (
-	"github.com/GabbyyLS/data-linter/linter/mocks"
-	"github.com/GabbyyLS/data-linter/mock"
+	"github.com/lilakurse/data-linter/linter/mocks"
+	"github.com/lilakurse/data-linter/mock"
 	"testing"
 )
 

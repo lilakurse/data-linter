@@ -2,7 +2,7 @@ package mocks
 
 import "github.com/stretchr/testify/mock"
 
-import "github.com/GabbyyLS/data-linter/models"
+import "github.com/lilakurse/data-linter/models"
 
 type Checker struct {
 	mock.Mock

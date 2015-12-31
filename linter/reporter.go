@@ -1,12 +1,12 @@
 package linter
 
 import (
+	"github.com/lilakurse/data-linter/models"
 	"time"
-	"github.com/GabbyyLS/data-linter/models"
 )
 
 // Reporter embeds read and write functionality for reports.
-type Reporter struct {
+type Reporter interface {
 	ReportReader
 	ReportWriter
 }
@@ -27,6 +27,3 @@ type ReportReader interface {
 	GetReportByCommitTime(time *time.Time) *models.Report
 	TotalReportsCount() *models.ReportsCount
 }
-
-
-

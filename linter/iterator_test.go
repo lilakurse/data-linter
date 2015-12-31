@@ -2,8 +2,8 @@ package linter
 
 import (
 	"testing"
-	"github.com/GabbyyLS/data-linter/linter/mocks"
-	"github.com/GabbyyLS/data-linter/mock"
+	"github.com/lilakurse/data-linter/linter/mocks"
+	"github.com/lilakurse/data-linter/mock"
 )
 
 var (
@@ -13,13 +13,13 @@ var (
 
 func TestName(t *testing.T) {
 	// Empty iterator
-	name := Name(mockIteratorWithoutCheckers)
+	name := mockIteratorWithoutCheckers.Name()
 	if len(name) == 0 {
 		t.Errorf("Iterator should have a name")
 	}
 
 	// Non-empty iterator
-	name = Name(mockIteratorWithCheckers)
+	name = mockIteratorWithCheckers.Name()
 	if len(name) == 0 {
 		t.Errorf("Iterator should have a name")
 	}
@@ -28,13 +28,13 @@ func TestName(t *testing.T) {
 
 func TestCount(t *testing.T) {
 	// Empty iterator
-	count := Count(mockIteratorWithoutCheckers)
+	count := mockIteratorWithoutCheckers.Count()
 	if count != mock.EmptyCount {
 		t.Errorf("Iterator should be empty")
 	}
 
 	// Non-empty iterator
-	count = Count(mockIteratorWithCheckers)
+	count = mockIteratorWithCheckers.Count()
 	if count != mock.NonEmptyCount {
 		t.Errorf("Iterator should not be empty")
 	}
@@ -43,13 +43,13 @@ func TestCount(t *testing.T) {
 
 func TestNext(t *testing.T) {
 	// Empty iterator
-	checkers := Next(mockIteratorWithoutCheckers, mock.Step)
+	checkers := mockIteratorWithoutCheckers.Next(mock.Step)
 	if checkers != nil {
 		t.Errorf("The list of checkers should be empty")
 	}
 
 	// Non-empty iterator
-	checkers = Next(mockIteratorWithCheckers, mock.Step)
+	checkers = mockIteratorWithCheckers.Next(mock.Step)
 	if checkers == nil && len(checkers) != mock.Step {
 		t.Errorf("The list of checkers should not be empty")
 	}

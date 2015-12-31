@@ -16,6 +16,23 @@ type Report struct {
 	Statistics Statistics
 }
 
+func (r *Report) Finish() {
+	now := time.Now()
+	r.Finished = &now
+}
+
+func (r *Report) Update() {
+	now := time.Now()
+	r.Updated = &now
+}
+
+func NewReport() *Report{
+	now := time.Now()
+	r := &Report{}
+	r.Created = &now
+	return r
+}
+
 // Statistics contain numeric information on inspected documents.
 type Statistics struct {
 	Total     int64

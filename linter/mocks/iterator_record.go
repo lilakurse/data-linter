@@ -1,9 +1,9 @@
 package mocks
 
 import (
-	"github.com/GabbyyLS/data-linter/mock"
+	"github.com/lilakurse/data-linter/mock"
 )
-import "github.com/GabbyyLS/data-linter/linter/checker"
+import "github.com/lilakurse/data-linter/linter/checker"
 
 
 func NewMockIteratorWithoutCheckers() *Iterator {
@@ -23,7 +23,7 @@ func NewMockIteratorWithCheckers() *Iterator {
 }
 
 // This conversion is needed to avoid import cycle:
-// import "github.com/GabbyyLS/data-linter/linter/checker" in
+// import "github.com/lilakurse/data-linter/linter/checker" in
 // /mock/checker.go
 func convertMockCheckerList(mockCheckerList []*mock.MockChecker) []*checker.Checker {
 	finalList := []*checker.Checker{}

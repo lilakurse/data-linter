@@ -1,6 +1,6 @@
 package checker
 
-import "github.com/GabbyyLS/data-linter/models"
+import "github.com/lilakurse/data-linter/models"
 
 //import (
 //	"golang.org/x/net/context"

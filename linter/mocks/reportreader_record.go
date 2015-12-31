@@ -1,6 +1,6 @@
 package mocks
 
-import "github.com/GabbyyLS/data-linter/mock"
+import "github.com/lilakurse/data-linter/mock"
 
 func NewMockAllReportReader() *ReportReader {
 	mockObj := new(ReportReader)

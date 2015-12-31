@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/GabbyyLS/data-linter/linter/checker/mocks"
-	//"github.com/GabbyyLS/data-linter/mock"
+	"github.com/lilakurse/data-linter/linter/checker/mocks"
+	//"github.com/lilakurse/data-linter/mock"
 	//"reflect"
 	"testing"
 )
