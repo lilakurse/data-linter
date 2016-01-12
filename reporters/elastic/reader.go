@@ -1,4 +1,5 @@
 package elastic
+
 import (
 	"time"
 	"github.com/lilakurse/data-linter/models"
@@ -20,7 +21,8 @@ const (
 )
 
 func (e *ElasticWReport) Start () (*models.Report, error) {
-	e.indexName = IndexNamePrefix+time.Now().Format(`2006-01-02`)
+	timePrefix := time.Now().Format(`2006-01-02`)
+	e.indexName = IndexNamePrefix+timePrefix
 	nr := models.NewReport()
 	response,err := e.client.Index().Index(e.indexName).Type(TypoReportName).BodyJson(nr).Do()
 	if err != nil {

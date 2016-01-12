@@ -3,10 +3,11 @@ package elastic
 import (
 	"github.com/lilakurse/data-linter/models"
 	el "gopkg.in/olivere/elastic.v3"
+	"fmt"
 )
 
 type ElasticWReport struct {
-	client    el.Client
+	client    *el.Client
 	indexName string
 	rid       string
 }
@@ -14,16 +15,17 @@ type ElasticWReport struct {
 func New() (*ElasticWReport, error) {
 	client, err := el.NewClient()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("NewClient: %s",err.Error())
 	}
-	_, _, err = client.Ping(el.DefaultURL).Do()
+	info, code, err := client.Ping(el.DefaultURL).Do()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Ping: %s",err.Error())
 	}
-	return &ElasticWReport{client}, nil
+	fmt.Printf("Elasticsearch returned with code %d and version %s", code, info.Version.Number)
+	return &ElasticWReport{client,"",""}, nil
 }
 
-func (e *ElasticWReport) PutToBulk(bulk el.BulkService, p []*models.Problem) {
+func (e *ElasticWReport) PutToBulk(bulk *el.BulkService, p []*models.Problem) {
 	for _, problem := range p {
 		problem.ReportId = e.rid
 		bulk.Add(el.NewBulkIndexRequest().Index(e.indexName).Type(TypoProblemName).Doc(problem))
