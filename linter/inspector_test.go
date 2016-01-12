@@ -17,6 +17,7 @@ func TestInspect(t *testing.T) {
 	if err != nil {
 		t.Error("Should be no error")
 	}
+	reporter.PrintReport()
 	//numIterator.Count
 	// Need to check count of inspected docs, count of collected problems
 }
