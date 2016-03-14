@@ -1,25 +1,50 @@
 package linter
 
-import "github.com/GabbyyLS/data-linter/models"
+import "github.com/lilakurse/data-linter/models"
 
 const Step = 50
 
+//
+type Inspector struct {
+	reporter ReportWriter
+}
+
+func NewInspector(reporter ReportWriter) *Inspector {
+	return &Inspector{reporter}
+}
+
 // Inspect runs through the iterator and collects problems for report.
 // TODO: probably need to revise the signature
-func Inspect(iterator Iterator) ([]*models.Problem, error) {
-	docsChecked := 0
-	problemsToCommit := []*models.Problem{}
-	for docsChecked <= iterator.Count() {
-		for _, document := range iterator.Next(Step) {
-			docToCheck := *document
-			docProblems, err := docToCheck.Check()
-			if err != nil {
-				return nil, err
-			}
-			problemsToCommit = append(problemsToCommit, docProblems...)
-		}
-		// TODO: We need to commit here!
-		docsChecked += Step
+func (i *Inspector) Inspect(iterator Iterator) error {
+	report,err := i.reporter.Start()
+	if err != nil {
+		return err
 	}
-	return problemsToCommit, nil
+	report.Statistics.Total = int64(iterator.Count())
+	report.Statistics.Inspected = 0
+	for report.Statistics.Inspected < report.Statistics.Total {
+		problemsToCommit := []*models.Problem{}
+		for _, document := range iterator.Next(Step) {
+			problems,err := document.Check()
+			if err != nil {
+				return err
+			}
+			if len(problems) == 0 {
+				report.Statistics.Valid++
+			} else {
+				report.Statistics.Invalid++
+			}
+			problemsToCommit = append(problemsToCommit, problems...)
+		}
+		err = i.reporter.Commit(report,problemsToCommit)
+		if err != nil {
+			return err
+		}
+		report.Statistics.Inspected += Step
+	}
+	err = i.reporter.Finish(report)
+	if err != nil {
+		return err
+	}
+	return nil
 }

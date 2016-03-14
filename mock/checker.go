@@ -1,8 +1,8 @@
 package mock
 
 import (
-	"github.com/GabbyyLS/data-linter/models"
-//	"github.com/GabbyyLS/data-linter/linter/checker"
+	"github.com/lilakurse/data-linter/models"
+//	"github.com/lilakurse/data-linter/linter/checker"
 	"fmt"
 )
 

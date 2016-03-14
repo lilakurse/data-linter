@@ -2,7 +2,7 @@ package mocks
 
 import (
 	"errors"
-	"github.com/GabbyyLS/data-linter/mock"
+	"github.com/lilakurse/data-linter/mock"
 )
 
 func NewMockValidDoc() *Checker {

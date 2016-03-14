@@ -5,8 +5,9 @@ import (
 	"math/rand"
 	//"strconv"
 	"time"
-	"github.com/GabbyyLS/data-linter/models"
-	"github.com/GabbyyLS/data-linter/linter/checker"
+	"github.com/lilakurse/data-linter/models"
+	"github.com/lilakurse/data-linter/linter/checker"
+	"strconv"
 )
 
 // This is the realization of the Iterator interface that through Next() returns batches of random Numbers.
@@ -14,24 +15,27 @@ import (
 type Number int
 
 type Generator struct {
-	GeneratorName  string			// Changed name because of error occuried "Generator has same name for the method and field"
-	GeneratorCount int
+	name  string			// Changed name because of error occuried "Generator has same name for the method and field"
+	count int
 }
 
-// TODO: resolve types
+func NewGenerator(name string,count int) Generator {
+	return Generator{name,count}
+}
+
 func (n Number) Check() ([]*models.Problem, error) {
 	var err error
 	err = nil
 	problems := []*models.Problem{}
 	details := []*models.ProblemDetails{}
-	if n/2 != 0 {
+	if (n%2) != 0 {
 		problem := new(models.Problem)
 		detail := new(models.ProblemDetails)
 		problem.Id = bson.NewObjectId().Hex()
 		detail.Id = "1"
-		//problem.Original = strconv.Itoa(n)
-		//detail.Fragment = strconv.Itoa(n)
-		detail.Description = "not even"
+		problem.Original = strconv.Itoa(int(n))
+		detail.Fragment = strconv.Itoa(int(n)) + " % 2"
+		detail.Description = detail.Fragment + " != 0 - it's bad value for our case"
 		details := append(details, detail)
 		problem.Details = details
 		problems = append(problems, problem)
@@ -41,19 +45,19 @@ func (n Number) Check() ([]*models.Problem, error) {
 }
 
 func (g Generator) Name() string {
-	return g.GeneratorName
+	return g.name
 }
 
 func (g Generator) Count() int {
-	return g.GeneratorCount
+	return g.count
 }
 
-func (g Generator) Next(Step int) []*checker.Checker {
-	checkers := []*checker.Checker{}
+func (g Generator) Next(Step int) []checker.Checker {
+	checkers := []checker.Checker{}
 	for i := 0; i < Step; i++ {
 		rand.Seed(time.Now().UnixNano())
 		checker := checker.Checker(Number(rand.Int()))
-		checkers = append(checkers, &checker)
+		checkers = append(checkers, checker)
 	}
 	return checkers
 }

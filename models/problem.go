@@ -3,6 +3,7 @@ package models
 // Problem refers to a particular file that contains problem(s).
 // Original is the string representation of that file.
 type Problem struct {
+	ReportId string
 	Id       string
 	Original string
 	Details  []*ProblemDetails
